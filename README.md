@@ -1,6 +1,6 @@
 # Nardini's Hortifruiti #
 
-Essa API está sendo desenvolvida para uso futuro no site oficial do EntusiaCast. Essa API conterá todos os episódios do podcast, com suas respectivas thumbnails, descrição, participantes e o link para se escutar direto no Spotify.
+Esse projeto é uma simulação de ecommerce de hortifruti. Com foco principal na função de listagem de produtos e e parte de "carrinho". Projeto exclusivo para completar o desafio proposto pela Frexco e expandir conhecimentos.
 
 # Tecnologias utilizadas #
 
