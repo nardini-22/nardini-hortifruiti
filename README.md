@@ -1,4 +1,4 @@
-# Nardini's Hortifruiti #
+# Nardini's Hortifruti #
 
 Esse projeto é uma simulação de ecommerce de hortifruti. Com foco principal na função de listagem de produtos e e parte de "carrinho". Projeto exclusivo para completar o desafio proposto pela Frexco e expandir conhecimentos.
 
