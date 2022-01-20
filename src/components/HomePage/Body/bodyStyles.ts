@@ -33,4 +33,12 @@ export const bodyStyles = makeStyles({
       display: "none",
     },
   },
+  img: {
+      width: "150px",
+      height: "150px",
+    "@media (max-width:780px)": {
+      width: "50px",
+      height: "50px",
+    },
+  },
 });
