@@ -1,4 +1,4 @@
 export interface IProductDataProps {
-    name: string;
-    id: number;
+  id: number;
+  name: string;
 }

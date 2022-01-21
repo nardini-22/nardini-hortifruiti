@@ -1,10 +1,11 @@
-import { useEffect } from "react";
+import { Button, Grid, Typography } from "@material-ui/core";
+import { useEffect, useState } from "react";
+import Body from "../components/ShoppingCart/Body/body";
 
-export default function ShoppingCart({ shoppingCart, setShoppingCart }: any) {
+export default function ShoppingCart() {
   return (
-    // shoppingCart.map((data:any) => (
-    //     {data}
-    // ))
-    <button onClick={() => console.log(shoppingCart)}>eiwhihfwihfiwh</button>
+    <>
+      <Body />
+    </>
   );
 }

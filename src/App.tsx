@@ -6,29 +6,12 @@ import ShoppingCart from "./pages/shoppingCart";
 import { theme } from "./styles/global";
 
 export default function App() {
-  const [shoppingCart, setShoppingCart] = useState<any[]>([]);
   return (
     <ThemeProvider theme={theme}>
       <BrowserRouter>
         <Routes>
-          <Route
-            path="/"
-            element={
-              <Home
-                setShoppingCart={setShoppingCart}
-                shoppingCart={shoppingCart}
-              />
-            }
-          />
-          <Route
-            path="/carrinho"
-            element={
-              <ShoppingCart
-                shoppingCart={shoppingCart}
-                setShoppingCart={setShoppingCart}
-              />
-            }
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/carrinho" element={<ShoppingCart />} />
         </Routes>
       </BrowserRouter>
     </ThemeProvider>

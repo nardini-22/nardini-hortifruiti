@@ -35,8 +35,11 @@ import Strawberry from "../../../assets/fruits/strawberry.jpg";
 import Tomato from "../../../assets/fruits/tomato.jpg";
 import Watermelon from "../../../assets/fruits/watermelon.jpg";
 
-export default function Body({ setShoppingCart, shoppingCart }: any) {
+export default function Body() {
   const [productsData, setProductsData] = useState<Array<IProductDataProps>>(
+    []
+  );
+  const [shoppingCart, setShoppingCart] = useState<Array<IProductDataProps>>(
     []
   );
   useEffect(() => {
@@ -53,9 +56,21 @@ export default function Body({ setShoppingCart, shoppingCart }: any) {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    let returnData = localStorage.getItem("shoppingCart");
+    if (returnData) {
+      setShoppingCart(JSON.parse(returnData));
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem("shoppingCart", JSON.stringify(shoppingCart));
+  }, [shoppingCart]);
+
   const classes = bodyStyles();
   const productsList = productsData.map((data: IProductDataProps) => (
-    <Grid className={classes.productsCards} item md={3} xs={4}>
+    <Grid key={data.id} className={classes.productsCards} item md={3} xs={4}>
       <img
         className={classes.img}
         src={
@@ -128,14 +143,14 @@ export default function Body({ setShoppingCart, shoppingCart }: any) {
           variant="contained"
           color="primary"
         >
-          <span className={classes.buttonText}>Adicionar ao carrinho</span>
+          <span className={classes.buttonText}>Add to cart</span>
           <span className={classes.buttonIcon}>
             <AddShoppingCartIcon />
           </span>
         </Button>
-        <Button onClick={() => console.log(shoppingCart)} variant="contained">
-          <span className={classes.buttonText}>Ver detalhes</span>
-          <span className={classes.buttonIcon}>
+        <Button variant="contained">
+          <span className={classes.secondaryButtonText}>Details</span>
+          <span className={classes.secondaryButtonIcon}>
             <InfoIcon />
           </span>
         </Button>
@@ -144,7 +159,17 @@ export default function Body({ setShoppingCart, shoppingCart }: any) {
   ));
 
   const addToCart = (data: IProductDataProps) => {
-    setShoppingCart([...shoppingCart, data]);
+    let added = true;
+    for (let i = 0; i < shoppingCart.length; i++) {
+      if (shoppingCart[i].id === data.id) {
+        added = false;
+      }
+    }
+    if (added) {
+      setShoppingCart([...shoppingCart, { id: data.id, name: data.name }]);
+    } else {
+      console.log("O produto já está no carrinho!");
+    }
   };
   return (
     <>
@@ -154,9 +179,9 @@ export default function Body({ setShoppingCart, shoppingCart }: any) {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item md={11} xs={12}>
-          <Typography gutterBottom variant="h4" color="primary">
-            Nossos produtos
+        <Grid item md={12} xs={12}>
+          <Typography gutterBottom align="center" variant="h4" color="primary">
+            Our products
           </Typography>
         </Grid>
         {productsList}

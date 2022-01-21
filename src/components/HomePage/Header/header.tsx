@@ -10,7 +10,7 @@ export default function Header() {
           Nardini's Hortifruti
         </Typography>
         <Typography variant="body1" className={classes.subTitle}>
-          O melhor sempre perto de você!
+          The best always close to you!!
         </Typography>
       </Paper>
     </>

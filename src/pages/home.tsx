@@ -1,11 +1,13 @@
 import Body from "../components/HomePage/Body/body";
 import Header from "../components/HomePage/Header/header";
+import Navbar from "../components/HomePage/Navbar/navbar";
 
-export default function Home({setShoppingCart, shoppingCart}: any) {
+export default function Home() {
   return (
     <>
       <Header />
-      <Body setShoppingCart={setShoppingCart} shoppingCart={shoppingCart}/>
+      <Navbar />
+      <Body />
     </>
   );
 }

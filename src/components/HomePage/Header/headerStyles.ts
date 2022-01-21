@@ -9,6 +9,7 @@ export const headerStyles = makeStyles({
     alignItems: "center",
     backgroundImage: `url(${Image})`,
     height: 200,
+    borderRadius: 0
   },
   title: {
     fontWeight: 500,
