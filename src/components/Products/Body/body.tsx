@@ -8,6 +8,8 @@ import {
 } from "@material-ui/core";
 import { useEffect, useState } from "react";
 import {
+  IDetailsProps,
+  INutritionsProps,
   IProductDataProps,
   IShoppingCartProps,
 } from "../../../@types/products";
@@ -56,7 +58,13 @@ export default function Body() {
   );
   const [open, setOpen] = useState<boolean>(false);
   const [openDetails, setOpenDetails] = useState<boolean>(false);
-  const [nutrition, setNutrition] = useState<any>([]);
+  const [nutrition, setNutrition] = useState<INutritionsProps>({
+    carbohydrates: 0,
+    protein: 0,
+    fat: 0,
+    calories: 0,
+    sugar: 0,
+  });
   useEffect(() => {
     async function getData() {
       await api
@@ -184,7 +192,12 @@ export default function Body() {
     if (added) {
       setShoppingCart([
         ...shoppingCart,
-        { id: data.id, name: data.name, qty: 1, price: 9.9 },
+        {
+          id: data.id,
+          name: data.name,
+          qty: 1,
+          price: 9.9,
+        },
       ]);
     } else {
       console.log("O produto já está no carrinho!");
@@ -199,10 +212,9 @@ export default function Body() {
     setOpenDetails(false);
   };
 
-  const handleDetails = (data: any) => {
+  const handleDetails = (data: IProductDataProps) => {
     setOpenDetails(true);
     setNutrition({ ...data.nutritions });
-    console.log(nutrition.fat);
   };
 
   return (
