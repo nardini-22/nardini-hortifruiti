@@ -1,22 +1,19 @@
 import {
   Button,
   Grid,
-  List,
-  ListSubheader,
-  ListItemText,
-  Typography,
+  List, ListItemText,
+  Typography
 } from "@material-ui/core";
-import { useEffect, useState } from "react";
-import {
-  IDetailsProps,
-  INutritionsProps,
-  IProductDataProps,
-  IShoppingCartProps,
-} from "../../../@types/products";
-import { api } from "../../../services/api";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import InfoIcon from "@material-ui/icons/Info";
-
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import {
+  INutritionsProps,
+  IProductDataProps,
+  IShoppingCartProps
+} from "../../../@types/products";
+import SimpleDialog from "../../../assets/dialog/simpleDialog";
 import Apple from "../../../assets/fruits/apple.jpg";
 import Apricot from "../../../assets/fruits/apricot.jpg";
 import Banana from "../../../assets/fruits/banana.jpg";
@@ -45,9 +42,8 @@ import Raspberry from "../../../assets/fruits/raspberry.jpg";
 import Strawberry from "../../../assets/fruits/strawberry.jpg";
 import Tomato from "../../../assets/fruits/tomato.jpg";
 import Watermelon from "../../../assets/fruits/watermelon.jpg";
+import { api } from "../../../services/api";
 import { bodyStyles } from "./bodyStyles";
-import SimpleDialog from "../../../assets/dialog/simpleDialog";
-import { Link } from "react-router-dom";
 
 export default function Body() {
   const [productsData, setProductsData] = useState<Array<IProductDataProps>>(
@@ -65,16 +61,17 @@ export default function Body() {
     calories: 0,
     sugar: 0,
   });
+  const [fruitName, setFruitName] = useState<string>("");
   useEffect(() => {
     async function getData() {
       await api
         .get("/api/fruit/all")
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           setProductsData(res.data);
         })
         .catch((err) => {
-          console.log(err);
+          // console.log(err);
         });
     }
     getData();
@@ -200,7 +197,6 @@ export default function Body() {
         },
       ]);
     } else {
-      console.log("O produto já está no carrinho!");
       setOpen(true);
     }
   };
@@ -215,6 +211,7 @@ export default function Body() {
   const handleDetails = (data: IProductDataProps) => {
     setOpenDetails(true);
     setNutrition({ ...data.nutritions });
+    setFruitName(data.name);
   };
 
   return (
@@ -244,13 +241,10 @@ export default function Body() {
       />
       <SimpleDialog
         selectedValue={
-          <List
-            subheader={
-              <ListSubheader id="list-subheader">
-                Nutritional values
-              </ListSubheader>
-            }
-          >
+          <List>
+            <Typography variant="h6" align="center" gutterBottom>
+              {fruitName}
+            </Typography>
             <ListItemText
               primary={`Carbohydrates: ${nutrition.carbohydrates}`}
             />

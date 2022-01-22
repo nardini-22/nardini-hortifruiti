@@ -1,6 +1,5 @@
 import { ThemeProvider } from "@material-ui/core";
-import { useState } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "./pages/home";
 import Products from "./pages/products";
 import ShoppingCart from "./pages/shoppingCart";
