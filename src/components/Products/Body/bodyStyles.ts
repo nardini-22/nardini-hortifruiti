@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core";
 export const bodyStyles = makeStyles({
   productsCards: {
     background: "#fff",
-    margin: 5,
+    margin: "5px!important",
     padding: 5,
     width: 200,
     borderRadius: 5,
@@ -57,5 +57,11 @@ export const bodyStyles = makeStyles({
       width: "50px",
       height: "50px",
     },
+  },
+  link: {
+    textDecoration: "none",
+  },
+  homeIcon: {
+    color: "#fff",
   },
 });

@@ -1,8 +1,17 @@
-import { Button, Grid, Typography } from "@material-ui/core";
+import {
+  Button,
+  Grid,
+  List,
+  ListSubheader,
+  ListItemText,
+  Typography,
+} from "@material-ui/core";
 import { useEffect, useState } from "react";
-import { IProductDataProps } from "../../../@types/products";
+import {
+  IProductDataProps,
+  IShoppingCartProps,
+} from "../../../@types/products";
 import { api } from "../../../services/api";
-import { bodyStyles } from "./bodyStyles";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import InfoIcon from "@material-ui/icons/Info";
 
@@ -34,14 +43,20 @@ import Raspberry from "../../../assets/fruits/raspberry.jpg";
 import Strawberry from "../../../assets/fruits/strawberry.jpg";
 import Tomato from "../../../assets/fruits/tomato.jpg";
 import Watermelon from "../../../assets/fruits/watermelon.jpg";
+import { bodyStyles } from "./bodyStyles";
+import SimpleDialog from "../../../assets/dialog/simpleDialog";
+import { Link } from "react-router-dom";
 
 export default function Body() {
   const [productsData, setProductsData] = useState<Array<IProductDataProps>>(
     []
   );
-  const [shoppingCart, setShoppingCart] = useState<Array<IProductDataProps>>(
+  const [shoppingCart, setShoppingCart] = useState<Array<IShoppingCartProps>>(
     []
   );
+  const [open, setOpen] = useState<boolean>(false);
+  const [openDetails, setOpenDetails] = useState<boolean>(false);
+  const [nutrition, setNutrition] = useState<any>([]);
   useEffect(() => {
     async function getData() {
       await api
@@ -134,8 +149,9 @@ export default function Body() {
         }
         alt="fruits"
       />
+      <Typography variant="h6">{data.name}</Typography>
       <Typography gutterBottom variant="h6">
-        {data.name}
+        U$ 9.90
       </Typography>
       <Grid className={classes.buttonGroup}>
         <Button
@@ -148,7 +164,7 @@ export default function Body() {
             <AddShoppingCartIcon />
           </span>
         </Button>
-        <Button variant="contained">
+        <Button onClick={() => handleDetails(data)} variant="contained">
           <span className={classes.secondaryButtonText}>Details</span>
           <span className={classes.secondaryButtonIcon}>
             <InfoIcon />
@@ -166,11 +182,29 @@ export default function Body() {
       }
     }
     if (added) {
-      setShoppingCart([...shoppingCart, { id: data.id, name: data.name }]);
+      setShoppingCart([
+        ...shoppingCart,
+        { id: data.id, name: data.name, qty: 1, price: 9.9 },
+      ]);
     } else {
       console.log("O produto já está no carrinho!");
+      setOpen(true);
     }
   };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleCloseDetails = () => {
+    setOpenDetails(false);
+  };
+
+  const handleDetails = (data: any) => {
+    setOpenDetails(true);
+    setNutrition({ ...data.nutritions });
+    console.log(nutrition.fat);
+  };
+
   return (
     <>
       <Grid
@@ -179,13 +213,44 @@ export default function Body() {
         justifyContent="center"
         alignItems="center"
       >
-        <Grid item md={12} xs={12}>
-          <Typography gutterBottom align="center" variant="h4" color="primary">
+        <Grid item md={12}>
+          <Typography align="center" variant="h4" color="primary">
             Our products
           </Typography>
         </Grid>
         {productsList}
       </Grid>
+      <SimpleDialog
+        selectedValue={
+          <Typography variant="body1">
+            This product is already in your cart! To go to your cart click{" "}
+            <Link to="/cart">here!</Link>
+          </Typography>
+        }
+        open={open}
+        onClose={handleClose}
+      />
+      <SimpleDialog
+        selectedValue={
+          <List
+            subheader={
+              <ListSubheader id="list-subheader">
+                Nutritional values
+              </ListSubheader>
+            }
+          >
+            <ListItemText
+              primary={`Carbohydrates: ${nutrition.carbohydrates}`}
+            />
+            <ListItemText primary={`Protein: ${nutrition.protein}`} />
+            <ListItemText primary={`Fat: ${nutrition.fat}`} />
+            <ListItemText primary={` Calories: ${nutrition.calories}`} />
+            <ListItemText primary={`Sugar: ${nutrition.sugar}`} />
+          </List>
+        }
+        open={openDetails}
+        onClose={handleCloseDetails}
+      />
     </>
   );
 }
