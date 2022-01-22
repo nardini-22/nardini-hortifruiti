@@ -4,7 +4,7 @@ Esse projeto é uma simulação de ecommerce de hortifruti. Com foco principal n
 
 # Avisos sobre o projeto #
 
-- A API fornecida não manda um _Access-Control-Allow-Origin: *_ no header da requisição, por isso o browser pode reclamar sobre o CORS. Eu tive problemas consumindo essa API, mas baixei uma extensão Moesif CORS (Chrome/Edge) e funcionou. Caso não funcione de começo, baixar essa extensão.
+- A API fornecida não manda um _Access-Control-Allow-Origin: *_ no header da requisição, por isso o browser pode reclamar sobre o CORS. Eu tive problemas consumindo essa API, mas baixei uma extensão chamada _Moesif CORS_ (Chrome/Edge) e funcionou. Caso não funcione de começo, baixar essa extensão.
 - Nesse projeto utilizei a metodologia do _git flow_, por isso tem alguns branchs e commits, o projeto terminado está na branch _Feature/Final-project-build_
 
 # Tecnologias utilizadas #
