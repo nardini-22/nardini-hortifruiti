@@ -1,17 +1,19 @@
 import {
   Button,
   Grid,
-  List, ListItemText,
-  Typography
+  List,
+  ListItemText,
+  Typography,
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import InfoIcon from "@material-ui/icons/Info";
+import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   INutritionsProps,
   IProductDataProps,
-  IShoppingCartProps
+  IShoppingCartProps,
 } from "../../../@types/products";
 import SimpleDialog from "../../../assets/dialog/simpleDialog";
 import Apple from "../../../assets/fruits/apple.jpg";
@@ -42,7 +44,9 @@ import Raspberry from "../../../assets/fruits/raspberry.jpg";
 import Strawberry from "../../../assets/fruits/strawberry.jpg";
 import Tomato from "../../../assets/fruits/tomato.jpg";
 import Watermelon from "../../../assets/fruits/watermelon.jpg";
-import { api } from "../../../services/api";
+import GreenApple from "../../../assets/fruits/greenApple.jpg";
+import Plum from "../../../assets/fruits/plum.jpg";
+import Umbu from "../../../assets/fruits/umbu.jpg";
 import { bodyStyles } from "./bodyStyles";
 
 export default function Body() {
@@ -64,14 +68,13 @@ export default function Body() {
   const [fruitName, setFruitName] = useState<string>("");
   useEffect(() => {
     async function getData() {
-      await api
-        .get("/api/fruit/all")
+      await axios
+        .get("http://localhost:3333/fruits")
         .then((res) => {
-          // console.log(res.data);
           setProductsData(res.data);
         })
         .catch((err) => {
-          // console.log(err);
+          console.log(err);
         });
     }
     getData();
@@ -89,6 +92,7 @@ export default function Body() {
   }, [shoppingCart]);
 
   const classes = bodyStyles();
+
   const productsList = productsData.map((data: IProductDataProps) => (
     <Grid key={data.id} className={classes.productsCards} item md={3} xs={4}>
       <img
@@ -150,6 +154,12 @@ export default function Body() {
             ? Tomato
             : data.name === "Watermelon"
             ? Watermelon
+            : data.name === "GreenApple"
+            ? GreenApple
+            : data.name === "Plum"
+            ? Plum
+            : data.name === "Umbu"
+            ? Umbu
             : undefined
         }
         alt="fruits"
