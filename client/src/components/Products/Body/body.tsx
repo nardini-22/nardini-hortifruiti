@@ -3,17 +3,16 @@ import {
   Grid,
   List,
   ListItemText,
-  Typography,
+  Typography
 } from "@material-ui/core";
 import AddShoppingCartIcon from "@material-ui/icons/AddShoppingCart";
 import InfoIcon from "@material-ui/icons/Info";
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import {
   INutritionsProps,
   IProductDataProps,
-  IShoppingCartProps,
+  IShoppingCartProps
 } from "../../../@types/products";
 import SimpleDialog from "../../../assets/dialog/simpleDialog";
 import Apple from "../../../assets/fruits/apple.jpg";
@@ -26,6 +25,7 @@ import Durian from "../../../assets/fruits/durian.jpg";
 import Fig from "../../../assets/fruits/fig.jpg";
 import Gooseberry from "../../../assets/fruits/gooseberry.jpg";
 import Grapes from "../../../assets/fruits/grapes.jpg";
+import GreenApple from "../../../assets/fruits/greenApple.jpg";
 import Guava from "../../../assets/fruits/guava.jpg";
 import Kiwi from "../../../assets/fruits/kiwi.jpg";
 import Lemon from "../../../assets/fruits/lemon.jpg";
@@ -40,13 +40,13 @@ import Passionfruit from "../../../assets/fruits/passionfruit.jpg";
 import Pear from "../../../assets/fruits/pear.jpg";
 import Persimmon from "../../../assets/fruits/persimmon.jpg";
 import Pineapple from "../../../assets/fruits/pineapple.jpg";
+import Plum from "../../../assets/fruits/plum.jpg";
 import Raspberry from "../../../assets/fruits/raspberry.jpg";
 import Strawberry from "../../../assets/fruits/strawberry.jpg";
 import Tomato from "../../../assets/fruits/tomato.jpg";
-import Watermelon from "../../../assets/fruits/watermelon.jpg";
-import GreenApple from "../../../assets/fruits/greenApple.jpg";
-import Plum from "../../../assets/fruits/plum.jpg";
 import Umbu from "../../../assets/fruits/umbu.jpg";
+import Watermelon from "../../../assets/fruits/watermelon.jpg";
+import { api } from "../../../services/api";
 import { bodyStyles } from "./bodyStyles";
 
 export default function Body() {
@@ -68,8 +68,8 @@ export default function Body() {
   const [fruitName, setFruitName] = useState<string>("");
   useEffect(() => {
     async function getData() {
-      await axios
-        .get("http://localhost:3333/fruits")
+      await api
+        .get("/fruits")
         .then((res) => {
           setProductsData(res.data);
         })
