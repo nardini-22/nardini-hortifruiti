@@ -2,8 +2,9 @@
 
 Esse projeto é uma simulação de ecommerce de hortifruti. Com foco principal na função de listagem de produtos e e parte de "carrinho". Projeto exclusivo para expandir conhecimentos.
 
-Demo: https://nardinis-hortifruti.herokuapp.com/products
+# Demo # 
 
+Link: https://nardinis-hortifruti.herokuapp.com/products
 
 # Tecnologias utilizadas #
 
@@ -13,5 +14,4 @@ Demo: https://nardinis-hortifruti.herokuapp.com/products
   <img align="center" height="30" width"40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/materialui/materialui-original.svg" />
   <img align="center" height="30" width"40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/heroku/heroku-plain.svg" />
   <img align="center" height="30" width"40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" />
-
 </div>
