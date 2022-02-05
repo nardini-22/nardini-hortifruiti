@@ -8,7 +8,7 @@ app.listen(3333);
 
 app.use(cors());
 
-app.use(express.static(path.join(__dirname, 'src/build')))
+app.use(express.static(path.join(__dirname, 'client/build')))
 
 app.get("/fruits", (req, res) => {
   axios
@@ -22,5 +22,5 @@ app.get("/fruits", (req, res) => {
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/src/build/index.html'))
+  res.sendFile(path.join(__dirname + '/client/build/index.html'))
 })
